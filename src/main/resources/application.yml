@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet-path: /bigfish
+
+spring:
+#  profiles:
+#    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/bigfish?useSSL=false&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+    druid:
+      test-on-borrow: false
+      test-while-idle: true
+      test-on-return: false
+      validation-query: select 'x'
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapUnderscoreToCamelCase: false

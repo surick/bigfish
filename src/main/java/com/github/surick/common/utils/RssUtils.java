@@ -5,20 +5,14 @@ import cn.hutool.http.HttpUtil;
 import com.github.surick.common.enums.RssType;
 import com.github.surick.model.Resource;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import java.io.BufferedReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Jin
@@ -122,67 +116,6 @@ public class RssUtils {
         return res;
     }
 
-    /**
-     * 获取网页数据
-     *
-     * @param url 网页链接
-     * @return html
-     */
-    public static String get(String url) {
-        try {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            OkHttpClient okHttpClient = new OkHttpClient()
-                    .newBuilder()
-                    .connectTimeout(5, TimeUnit.SECONDS)
-                    .readTimeout(50, TimeUnit.SECONDS)
-                    .writeTimeout(50, TimeUnit.SECONDS)
-                    .build();
-            Request request = new Request.Builder().url(url).build();;
-
-            Response response;
-            response = okHttpClient.newCall(request).execute();
-            try (ResponseBody responseBody = response.body()) {
-                BufferedReader bufferedReader = new BufferedReader(Objects.requireNonNull(responseBody).charStream());
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                response.close();
-            }
-            return stringBuilder.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     * 获取简介,图片等信息
-     *
-     * @return WebDetails
-     */
-    // public static WebDetails getWebDetails(String html) {
-    //     WebDetails webDetails = new WebDetails();
-    //     org.jsoup.nodes.Document doc = Jsoup.parse(html);
-    //     Elements es = doc.select("meta[property]");
-    //     if (es.size() == 0) {
-    //         es = doc.select("meta[name=description]");
-    //         if (es.size() != 0) {
-    //             webDetails.description = es.get(0).attr("content");
-    //         }
-    //     } else {
-    //         for (org.jsoup.nodes.Element e : es) {
-    //             if (e.attr("property").equals("og:description")) {
-    //                 webDetails.description = e.attr("content");
-    //             }
-    //             if (e.attr("property").equals("og:image")) {
-    //                 webDetails.imageUrl = e.attr("content");
-    //             }
-    //         }
-    //     }
-    //     return webDetails;
-    // }
     public static void main(String[] args) {
         parseXML(HttpUtil.get("http://www.ruanyifeng.com/blog/atom.xml"));
     }

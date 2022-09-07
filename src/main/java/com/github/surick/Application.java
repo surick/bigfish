@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author Jin
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @Import({cn.hutool.extra.spring.SpringUtil.class})
 @MapperScan({"com.github.surick.dao", "cn.hutool.extra.spring"})
+@EnableScheduling
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

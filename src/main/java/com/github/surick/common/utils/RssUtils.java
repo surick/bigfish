@@ -69,7 +69,7 @@ public class RssUtils {
         for (Element e : elements) {
             String t = (String) e.elements("title").get(0).getData();
             String l = (String) e.elements("link").get(0).attribute("href").getData();
-            String desc = (String) e.elements("description").get(0).getData();
+            String desc = (String) e.elements("summary").get(0).getData();
             Date d = null;
             try {
                 String date = String.valueOf(e.elements("updated").get(0).getData()).trim();
@@ -184,6 +184,6 @@ public class RssUtils {
     //     return webDetails;
     // }
     public static void main(String[] args) {
-        parseXML(HttpUtil.get("https://mantyke.icu/index.xml"));
+        parseXML(HttpUtil.get("http://www.ruanyifeng.com/blog/atom.xml"));
     }
 }

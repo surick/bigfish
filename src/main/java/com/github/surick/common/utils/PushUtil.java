@@ -1,5 +1,6 @@
 package com.github.surick.common.utils;
 
+import cn.hutool.extra.mail.MailUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -38,5 +39,13 @@ public class PushUtil {
                         .cookie("")
                         .body(JSON.toJSONString(params)).execute().body();
         log.info("tr------{}", resp);
+    }
+
+    public static void push2Email(String name) {
+        MailUtil.send("jk103@qq.com", "更新啦！", name + "更新啦！", false);
+    }
+
+    public static void main(String[] args) {
+        push2Email("11");
     }
 }

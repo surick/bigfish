@@ -51,9 +51,7 @@ public class AutoJavService {
             }
         }
         PushUtil.push2Wx(sb.toString());
+        PushUtil.push2Email(sb.toString());
     }
 
-    public static void main(String[] args) {
-        run2();
-    }
 }

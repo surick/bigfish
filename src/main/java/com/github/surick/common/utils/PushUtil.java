@@ -45,7 +45,4 @@ public class PushUtil {
         MailUtil.send("jk103@qq.com", "更新啦！", name + "更新啦！", false);
     }
 
-    public static void main(String[] args) {
-        push2Email("11");
-    }
 }

@@ -21,7 +21,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class WebUtils {
+public class JavUtil {
     public static final String PATH = "C:\\Users\\jk103\\Desktop\\test\\";
 
     /**
@@ -143,26 +143,6 @@ public class WebUtils {
         return videos;
     }
 
-    public static void push2Transmission(String magnet) {
-        Map<String, Object> params = new HashMap<>();
-
-        params.put("method", "torrent-add");
-        Map<String, Object> arguments = new HashMap<>();
-        arguments.put("filename", magnet);
-        arguments.put("paused", false);
-        arguments.put("download-dir", "/volume2/downloads");
-        params.put("arguments", arguments);
-        params.put("tag", "");
-
-        String resp =
-                HttpUtil.createPost("http://192.168.2.6:9091/transmission/rpc")
-                        .header("Authorization", "")
-                        .header("X-Transmission-Session-Id", "")
-                        .cookie("")
-                        .body(JSON.toJSONString(params)).execute().body();
-        log.info("tr------{}", resp);
-    }
-
     public static String isUpdate(String html) {
         Document doc = Jsoup.parse(html);
         Elements es = doc.select("div[class=\"meta\"]");
@@ -181,12 +161,6 @@ public class WebUtils {
             }
         }
         return "";
-    }
-
-    public static void push2Wx(String name) {
-        HttpUtil.get(
-                "https://sctapi.ftqq.com/xxx.send?" +
-                        "title=" + "更新啦！" + "&desp=" + name + "更新啦！");
     }
 
     public static void main(String[] args) {

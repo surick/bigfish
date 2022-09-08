@@ -19,11 +19,7 @@ import java.util.*;
  * @since 2022/9/7
  */
 @Slf4j
-public class RssUtils {
-
-    private RssUtils() {
-
-    }
+public class RssUtil {
 
     /**
      * 处理 XML 数据

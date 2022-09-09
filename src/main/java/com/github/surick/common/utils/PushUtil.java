@@ -3,6 +3,7 @@ package com.github.surick.common.utils;
 import cn.hutool.extra.mail.MailUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSON;
+import com.github.surick.common.constants.ConfigConstants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -16,9 +17,7 @@ import java.util.Map;
 public class PushUtil {
 
     public static void push2Wx(String name) {
-        HttpUtil.get(
-                "https://sctapi.ftqq.com/xxx.send?" +
-                        "title=" + "更新啦！" + "&desp=" + name + "更新啦！");
+        HttpUtil.get(ConfigConstants.FT_PUSH + "title=" + "更新啦！" + "&desp=" + name + "更新啦！");
     }
 
     public static void push2Transmission(String magnet) {
@@ -33,16 +32,16 @@ public class PushUtil {
         params.put("tag", "");
 
         String resp =
-                HttpUtil.createPost("http://192.168.2.6:9091/transmission/rpc")
-                        .header("Authorization", "")
-                        .header("X-Transmission-Session-Id", "")
-                        .cookie("")
+                HttpUtil.createPost(ConfigConstants.TR_ADD)
+                        .header("Authorization", ConfigConstants.TR_AUTH)
+                        .header("X-Transmission-Session-Id", ConfigConstants.TR_SESSION_ID)
+                        .cookie(ConfigConstants.TR_COOKIE)
                         .body(JSON.toJSONString(params)).execute().body();
         log.info("tr------{}", resp);
     }
 
     public static void push2Email(String name) {
-        MailUtil.send("jk103@qq.com", "更新啦！", name + "更新啦！", false);
+        MailUtil.send(ConfigConstants.EMAIL, "更新啦！", name + "更新啦！", false);
     }
 
 }

@@ -113,6 +113,8 @@ public class RssUtil {
     }
 
     public static void main(String[] args) {
-        parseXML(HttpUtil.get("http://www.ruanyifeng.com/blog/atom.xml"));
+        Map<String, List<Resource>> res = parseXML(HttpUtil.get("http://www.ruanyifeng.com/blog/atom.xml"));
+
+
     }
 }

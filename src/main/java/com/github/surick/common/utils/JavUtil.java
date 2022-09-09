@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
-import com.alibaba.fastjson2.JSON;
+import com.github.surick.common.constants.ConfigConstants;
 import com.github.surick.model.WebDetails;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
@@ -17,12 +17,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.BufferedReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class JavUtil {
-    public static final String PATH = "C:\\Users\\jk103\\Desktop\\test\\";
 
     /**
      * 获取网页数据
@@ -79,7 +81,7 @@ public class JavUtil {
                     log.info("get---------{}", webDetails);
 
                     HttpUtil.downloadFileFromUrl(webDetails.getUrl(),
-                            PATH + webDetails.getName().split("_")[0] + "\\" + webDetails.getName() + "." + FileUtil.getSuffix(webDetails.getUrl()));
+                            ConfigConstants.FILE_PATH + webDetails.getName().split("_")[0] + "\\" + webDetails.getName() + "." + FileUtil.getSuffix(webDetails.getUrl()));
                 }
             }
         }
